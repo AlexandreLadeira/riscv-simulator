@@ -1,6 +1,7 @@
 package entity.instruction
 
 import entity.Processor
+import extensions.registerABIName
 
 class RegisterInstruction(
     private val type: RegisterInstructionType,
@@ -8,7 +9,10 @@ class RegisterInstruction(
     private val rs2: Int,
     private val rd: Int,
 ) : Instruction() {
-    override val mnemonic = type.toString()
+    override val disassembly =
+        "${type.name.padEnd(8, ' ')} " +
+            "${rd.registerABIName}, ${rs1.registerABIName}, ${rs2.registerABIName}"
+
     override fun execute(processor: Processor) {
         val result = type.getResult(
             first = processor.readRegister(rs1),
@@ -16,7 +20,7 @@ class RegisterInstruction(
         )
 
         processor.writeToRegister(rd, result)
-        processor.incrementProgramCounter()
+        processor.incrementPC()
     }
 }
 

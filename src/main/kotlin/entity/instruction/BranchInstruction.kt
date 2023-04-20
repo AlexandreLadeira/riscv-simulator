@@ -1,6 +1,7 @@
 package entity.instruction
 
 import entity.Processor
+import extensions.registerABIName
 
 class BranchInstruction(
     private val type: BranchInstructionType,
@@ -8,15 +9,17 @@ class BranchInstruction(
     private val rs2: Int,
     private val immediate: Int
 ) : Instruction() {
-    override val mnemonic = type.toString()
+    override val disassembly =
+        "${type.name.padEnd(8, ' ')} ${rs1.registerABIName}, ${rs2.registerABIName}, $immediate"
+
     override fun execute(processor: Processor) {
         val first = processor.readRegister(rs1)
         val second = processor.readRegister(rs2)
 
         if (type.shouldBranch(first, second)) {
-            processor.programCounter += immediate
+            processor.addToPC(immediate)
         } else {
-            processor.incrementProgramCounter()
+            processor.incrementPC()
         }
     }
 
