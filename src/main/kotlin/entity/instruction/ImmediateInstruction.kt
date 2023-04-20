@@ -1,14 +1,18 @@
 package entity.instruction
 
 import entity.Processor
-import extensions.bits
 import extensions.firstByte
 import extensions.firstByteUnsigned
 import extensions.firstTwoBytes
 import extensions.firstTwoBytesUnsigned
+import extensions.funct3
+import extensions.immediate
 import extensions.mnemonic
+import extensions.rd
 import extensions.registerABIName
-import extensions.toBinary
+import extensions.rs1
+import extensions.toBinaryString
+import extensions.withLastBitCleared
 
 data class ImmediateInstruction(
     private val type: ImmediateInstructionType,
@@ -19,18 +23,21 @@ data class ImmediateInstruction(
     override val disassembly =
         "${type.name.mnemonic} ${rd.registerABIName}, ${rs1.registerABIName}, $immediate"
 
-    constructor(opcode: Int, data: Int) : this(
-        type = ImmediateInstructionType.fromOpcode(opcode, data.bits(12, 14)),
-        immediate = data.bits(20, 31),
-        rs1 = data.bits(15, 19),
-        rd = data.bits(7, 11)
+    constructor(opcode: Int, rawInstruction: Int) : this(
+        type = ImmediateInstructionType.fromOpcode(opcode, rawInstruction.funct3()),
+        immediate = rawInstruction.immediate(),
+        rs1 = rawInstruction.rs1(),
+        rd = rawInstruction.rd()
     )
 
     override fun execute(processor: Processor) {
         val source = processor.readRegister(rs1)
 
         val result = when (type) {
-            ImmediateInstructionType.JALR -> TODO()
+            ImmediateInstructionType.JALR -> (processor.programCounter + 4).also {
+                processor.setPC((source + immediate).withLastBitCleared())
+            }
+
             ImmediateInstructionType.LB -> processor.loadWithImmediate(source).firstByte()
             ImmediateInstructionType.LH -> processor.loadWithImmediate(source).firstTwoBytes()
             ImmediateInstructionType.LW -> processor.loadWithImmediate(source)
@@ -45,7 +52,10 @@ data class ImmediateInstruction(
         }
 
         processor.writeToRegister(rd, result)
-        processor.incrementPC()
+
+        if (type != ImmediateInstructionType.JALR) {
+            processor.incrementPC()
+        }
     }
 
     private fun Processor.loadWithImmediate(source: Int) = loadWord(source + immediate)
@@ -67,17 +77,37 @@ enum class ImmediateInstructionType {
     ANDI;
 
     companion object {
-        fun fromOpcode(opcode: Int, funct3: Int) = when (funct3) {
-            0b000 -> ADDI
-            0b010 -> SLTI
-            0b100 -> XORI
-            0b011 -> SLTIU
-            0b110 -> ORI
-            0b111 -> ANDI
+        fun fromOpcode(opcode: Int, funct3: Int) = when (opcode) {
+            0b0010011 -> when (funct3) {
+                0b000 -> ADDI
+                0b010 -> SLTI
+                0b100 -> XORI
+                0b011 -> SLTIU
+                0b110 -> ORI
+                0b111 -> ANDI
+                else -> unknownFunct3Error(funct3)
+            }
+
+            0b0000011 -> when (funct3) {
+                0b000 -> LB
+                0b001 -> LH
+                0b010 -> LW
+                0b100 -> LBU
+                0b101 -> LHU
+                else -> unknownFunct3Error(funct3)
+            }
+
+            0b1100111 -> JALR
+
             else -> throw RuntimeException(
-                "Unknown funct3 for immediate instruction: " +
-                    "opcode=${opcode.toBinary()}, funct3=${funct3.toBinary()}"
+                "Unknown opcode for immediate instruction ${opcode.toBinaryString()}"
             )
         }
+
+        private fun unknownFunct3Error(funct3: Int): Nothing =
+            throw IllegalArgumentException(
+                "Unknown funct3 for immediate instruction ${funct3.toBinaryString()}"
+            )
     }
+
 }

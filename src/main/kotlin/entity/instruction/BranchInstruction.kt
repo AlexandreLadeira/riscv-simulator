@@ -1,8 +1,13 @@
 package entity.instruction
 
 import entity.Processor
+import extensions.branchImmediate
+import extensions.funct3
 import extensions.mnemonic
 import extensions.registerABIName
+import extensions.rs1
+import extensions.rs2
+import extensions.toBinaryString
 
 class BranchInstruction(
     private val type: BranchInstructionType,
@@ -12,6 +17,13 @@ class BranchInstruction(
 ) : Instruction() {
     override val disassembly =
         "${type.name.mnemonic} ${rs1.registerABIName}, ${rs2.registerABIName}, $immediate"
+
+    constructor(rawInstruction: Int) : this(
+        type = BranchInstructionType.fromFunct3(rawInstruction.funct3()),
+        rs1 = rawInstruction.rs1(),
+        rs2 = rawInstruction.rs2(),
+        immediate = rawInstruction.branchImmediate()
+    )
 
     override fun execute(processor: Processor) {
         val first = processor.readRegister(rs1)
@@ -41,5 +53,19 @@ enum class BranchInstructionType {
         BGE -> first >= second
         BLTU -> first.toUInt() < second.toUInt()
         BGEU -> first.toUInt() >= second.toUInt()
+    }
+
+    companion object {
+        fun fromFunct3(funct3: Int) = when (funct3) {
+            0b000 -> BEQ
+            0b001 -> BNE
+            0b100 -> BLT
+            0b101 -> BGE
+            0b110 -> BLTU
+            0b111 -> BGEU
+            else -> throw IllegalArgumentException(
+                "Unknown funct3 for branch instruction: ${funct3.toBinaryString()}"
+            )
+        }
     }
 }

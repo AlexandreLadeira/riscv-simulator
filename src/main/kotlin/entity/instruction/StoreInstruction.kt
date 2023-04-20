@@ -1,10 +1,13 @@
 package entity.instruction
 
 import entity.Processor
-import extensions.bits
+import extensions.funct3
 import extensions.mnemonic
 import extensions.registerABIName
-import extensions.toBinary
+import extensions.rs1
+import extensions.rs2
+import extensions.storeImmediate
+import extensions.toBinaryString
 
 class StoreInstruction(
     private val type: StoreInstructionType,
@@ -15,11 +18,11 @@ class StoreInstruction(
     override val disassembly =
         "${type.name.mnemonic} ${rs2.registerABIName}, $immediate(${rs1.registerABIName})"
 
-    constructor(opcode: Int, data: Int) : this(
-        type = StoreInstructionType.fromOpcode(opcode, data.bits(12, 14)),
-        rs1 = data.bits(15, 19),
-        rs2 = data.bits(20, 24),
-        immediate = (data.bits(25, 31) shl 5) or data.bits(7, 11)
+    constructor(rawInstruction: Int) : this(
+        type = StoreInstructionType.fromFunct3(rawInstruction.funct3()),
+        rs1 = rawInstruction.rs1(),
+        rs2 = rawInstruction.rs2(),
+        immediate = rawInstruction.storeImmediate()
     )
 
     override fun execute(processor: Processor) {
@@ -44,12 +47,12 @@ enum class StoreInstructionType {
     SW;
 
     companion object {
-        fun fromOpcode(opcode: Int, funct3: Int) = when (funct3) {
+        fun fromFunct3(funct3: Int) = when (funct3) {
             0b000 -> SB
             0b001 -> SH
             0b010 -> SW
             else -> throw IllegalArgumentException(
-                "Unknown opcode for store instruction: opcode=${opcode.toBinary()}, funct3=${funct3.toBinary()}"
+                "Unknown funct3 for store instruction: ${funct3.toBinaryString()}"
             )
         }
     }

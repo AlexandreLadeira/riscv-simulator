@@ -1,13 +1,21 @@
 package entity
 
+import entity.instruction.BranchInstruction
 import entity.instruction.ImmediateInstruction
 import entity.instruction.Instruction
+import entity.instruction.JumpInstruction
 import entity.instruction.StoreInstruction
 import extensions.bits
+import extensions.opcode
+import extensions.rs1
+import extensions.rs2
+import extensions.toBinaryString
+import model.LogLine
 
 class Processor(private val memory: Memory) {
     private val registers = IntArray(NUMBER_OF_REGISTERS)
-    private var programCounter = PROGRAM_COUNTER_INITIAL_VALUE
+    var programCounter = PROGRAM_COUNTER_INITIAL_VALUE
+        private set
 
     init {
         // TODO: is that ok?
@@ -16,9 +24,9 @@ class Processor(private val memory: Memory) {
 
     fun run() {
         while (true) {
-            val data = memory.loadWord(programCounter)
-            val instruction = parseInstruction(data)
-            executeInstruction(instruction)
+            val rawInstruction = memory.loadWord(programCounter)
+            val instruction = parseInstruction(rawInstruction)
+            executeInstruction(instruction, rawInstruction)
         }
     }
 
@@ -36,23 +44,48 @@ class Processor(private val memory: Memory) {
         programCounter += i
     }
 
+    fun setPC(i: Int) {
+        programCounter = i
+    }
+
     fun loadWord(address: Int) = memory.loadWord(address)
 
     fun storeWord(address: Int, value: Int) = memory.storeWord(address = address, value = value)
 
     fun storeByte(address: Int, value: Byte) = memory.storeByte(address = address, value = value)
 
-    private fun parseInstruction(data: Int): Instruction =
-        when (val opcode = data.bits(0, 6)) {
-            IMMEDIATE_INSTRUCTION_OPCODE -> ImmediateInstruction(opcode, data)
-            STORE_INSTRUCTION_OPCODE -> StoreInstruction(opcode, data)
-            else -> throw IllegalArgumentException("Unknown instruction: $data")
+    private fun parseInstruction(rawInstruction: Int): Instruction =
+        when (val opcode = rawInstruction.opcode()) {
+            IMMEDIATE_INSTRUCTION_OPCODE,
+            LOAD_INSTRUCTION_OPCODE,
+            JALR_INSTRUCTION_OPCODE -> ImmediateInstruction(opcode, rawInstruction)
+
+            STORE_INSTRUCTION_OPCODE -> StoreInstruction(rawInstruction)
+            BRANCH_INSTRUCTION_OPCODE -> BranchInstruction(rawInstruction)
+            JUMP_INSTRUCTION_OPCODE -> JumpInstruction(rawInstruction)
+            else -> throw IllegalArgumentException("Unknown instruction: ${rawInstruction.toBinaryString()}")
         }
 
-    private fun executeInstruction(instruction: Instruction) {
-        println(instruction.disassembly)
+    private fun executeInstruction(instruction: Instruction, rawInstruction: Int) {
+        val rs1 = rawInstruction.rs1()
+        val rs2 = rawInstruction.rs2()
+        val rd = rawInstruction.bits(7, 11)
+
+        val partialLogLine = LogLine(
+            pc = programCounter,
+            rawInstruction = rawInstruction,
+            rdIndex = rd,
+            rs1Index = rs1,
+            rs2Index = rs2,
+            rdValue = 0,
+            rs1Value = readRegister(rs1),
+            rs2Value = readRegister(rs2),
+            instruction = instruction
+        )
+
         instruction.execute(this)
-        // log()
+
+        println(partialLogLine.copy(rdValue = readRegister(rd)))
     }
 
     private companion object {
@@ -63,5 +96,9 @@ class Processor(private val memory: Memory) {
 
         const val IMMEDIATE_INSTRUCTION_OPCODE = 0b0010011
         const val STORE_INSTRUCTION_OPCODE = 0b0100011
+        const val LOAD_INSTRUCTION_OPCODE = 0b0000011
+        const val JALR_INSTRUCTION_OPCODE = 0b1100111
+        const val BRANCH_INSTRUCTION_OPCODE = 0b1100011
+        const val JUMP_INSTRUCTION_OPCODE = 0b1101111
     }
 }

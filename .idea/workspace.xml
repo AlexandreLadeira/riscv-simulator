@@ -5,19 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f251e1f-0228-4f3d-8b38-5b53ecdad004" name="Changes" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/extensions/StringExtensions.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/111.if.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/Memory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/Memory.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/Processor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/Processor.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/BranchInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/BranchInstruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/RegisterInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/RegisterInstruction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/JumpInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/JumpInstruction.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/StoreInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/StoreInstruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/extensions/EnumExtensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/model/LogLine.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/model/LogLine.kt" afterDir="false" />
+    </list>
+    <list id="41a32884-40fd-4eb4-ad47-85dd4522ce54" name="Changes by gabriel.cardenete" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/Processor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/Processor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/StoreInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/StoreInstruction.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/extensions/IntExtensions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/extensions/IntExtensions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/extensions/RegisterABIName.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/extensions/RegisterABIName.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/model/LogLine.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/model/LogLine.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +63,38 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.8.20/6a8d4dfebb88f951bcd9f58636f085bf24ff3e8b/kotlin-stdlib-1.8.20-sources.jar!/kotlin/Primitives.kt" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/kotlin/entity/instruction/StoreInstruction.kt">
+      <ranges>
+        <range start1="3" end1="4" start2="3" end2="4" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
+        <range start1="6" end1="7" start2="6" end2="10" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
+        <range start1="17" end1="22" start2="20" end2="25" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
+        <range start1="46" end1="47" start2="49" end2="50" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
+        <range start1="51" end1="52" start2="54" end2="55" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/kotlin/model/LogLine.kt">
+      <ranges>
+        <range start1="3" end1="3" start2="3" end2="4" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
+        <range start1="6" end1="7" start2="7" end2="8" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
+        <range start1="16" end1="18" start2="17" end2="20" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
+        <range start1="20" end1="22" start2="22" end2="24" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/kotlin/entity/Processor.kt">
+      <ranges>
+        <range start1="2" end1="2" start2="2" end2="3" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
+        <range start1="6" end1="6" start2="7" end2="11" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
+        <range start1="9" end1="10" start2="14" end2="16" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
+        <range start1="18" end1="21" start2="24" end2="27" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
+        <range start1="37" end1="37" start2="43" end2="47" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
+        <range start1="46" end1="49" start2="56" end2="67" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
+        <range start1="51" end1="53" start2="69" end2="86" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
+        <range start1="54" end1="55" start2="87" end2="89" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
+        <range start1="65" end1="65" start2="99" end2="103" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
+      </ranges>
+    </file>
   </component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
@@ -111,7 +144,7 @@
     <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="riscv-simulator.main" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;$PROJECT_DIR$/src/main/resources/011.const.bin&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;$PROJECT_DIR$/src/main/resources/111.if.bin&quot;" />
       <shortenClasspath name="NONE" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -131,7 +164,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1681667883708</updated>
-      <workItem from="1681667884808" duration="24733000" />
+      <workItem from="1681667884808" duration="32334000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1681668051035</created>
@@ -154,11 +187,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/entity/instruction/StoreInstruction.kt</url>
-          <line>27</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-function">
           <url>file://$PROJECT_DIR$/src/main/kotlin/entity/Memory.kt</url>
           <line>2</line>
