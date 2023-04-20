@@ -1,6 +1,7 @@
 package entity.instruction
 
 import entity.Processor
+import extensions.mnemonic
 import extensions.registerABIName
 
 class BranchInstruction(
@@ -10,7 +11,7 @@ class BranchInstruction(
     private val immediate: Int
 ) : Instruction() {
     override val disassembly =
-        "${type.name.padEnd(8, ' ')} ${rs1.registerABIName}, ${rs2.registerABIName}, $immediate"
+        "${type.name.mnemonic} ${rs1.registerABIName}, ${rs2.registerABIName}, $immediate"
 
     override fun execute(processor: Processor) {
         val first = processor.readRegister(rs1)

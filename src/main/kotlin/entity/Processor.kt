@@ -5,16 +5,16 @@ import entity.instruction.Instruction
 import entity.instruction.StoreInstruction
 import extensions.bits
 
-class Processor(
-    val memory: Memory,
-) {
+class Processor(private val memory: Memory) {
     private val registers = IntArray(NUMBER_OF_REGISTERS)
-    private var programCounter = 0x10074
+    private var programCounter = PROGRAM_COUNTER_INITIAL_VALUE
+
+    init {
+        // TODO: is that ok?
+        writeToRegister(STACK_POINTER_INDEX, STACK_POINTER_INITIAL_VALUE)
+    }
 
     fun run() {
-        // Initialize stack to 0x10000 FIXME!
-        writeToRegister(2, 0x10000)
-
         while (true) {
             val data = memory.loadWord(programCounter)
             val instruction = parseInstruction(data)
@@ -22,17 +22,11 @@ class Processor(
         }
     }
 
-    fun readRegister(register: Int): Int =
-        when (register) {
-            0 -> 0
-            else -> registers[register]
-        }
+    fun readRegister(register: Int): Int = registers[register]
 
-    fun writeToRegister(register: Int, value: Int) =
-        when (register) {
-            0 -> {}
-            else -> registers[register] = value
-        }
+    fun writeToRegister(register: Int, value: Int) {
+        if (register != 0) registers[register] = value
+    }
 
     fun incrementPC() {
         programCounter += 4
@@ -42,11 +36,16 @@ class Processor(
         programCounter += i
     }
 
+    fun loadWord(address: Int) = memory.loadWord(address)
+
+    fun storeWord(address: Int, value: Int) = memory.storeWord(address = address, value = value)
+
+    fun storeByte(address: Int, value: Byte) = memory.storeByte(address = address, value = value)
 
     private fun parseInstruction(data: Int): Instruction =
         when (val opcode = data.bits(0, 6)) {
-            0b0010011 -> ImmediateInstruction(opcode, data)
-            0b0100011 -> StoreInstruction(opcode, data)
+            IMMEDIATE_INSTRUCTION_OPCODE -> ImmediateInstruction(opcode, data)
+            STORE_INSTRUCTION_OPCODE -> StoreInstruction(opcode, data)
             else -> throw IllegalArgumentException("Unknown instruction: $data")
         }
 
@@ -58,6 +57,11 @@ class Processor(
 
     private companion object {
         const val NUMBER_OF_REGISTERS = 32
-    }
+        const val PROGRAM_COUNTER_INITIAL_VALUE = 0x10074
+        const val STACK_POINTER_INDEX = 2
+        const val STACK_POINTER_INITIAL_VALUE = 0x10000
 
+        const val IMMEDIATE_INSTRUCTION_OPCODE = 0b0010011
+        const val STORE_INSTRUCTION_OPCODE = 0b0100011
+    }
 }

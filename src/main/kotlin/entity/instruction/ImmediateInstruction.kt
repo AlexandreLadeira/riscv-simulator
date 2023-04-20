@@ -1,7 +1,14 @@
 package entity.instruction
 
 import entity.Processor
-import extensions.*
+import extensions.bits
+import extensions.firstByte
+import extensions.firstByteUnsigned
+import extensions.firstTwoBytes
+import extensions.firstTwoBytesUnsigned
+import extensions.mnemonic
+import extensions.registerABIName
+import extensions.toBinary
 
 data class ImmediateInstruction(
     private val type: ImmediateInstructionType,
@@ -10,7 +17,7 @@ data class ImmediateInstruction(
     private val rd: Int
 ) : Instruction() {
     override val disassembly =
-        "${type.name.padEnd(8, ' ')} ${rd.registerABIName}, ${rs1.registerABIName}, $immediate"
+        "${type.name.mnemonic} ${rd.registerABIName}, ${rs1.registerABIName}, $immediate"
 
     constructor(opcode: Int, data: Int) : this(
         type = ImmediateInstructionType.fromOpcode(opcode, data.bits(12, 14)),
@@ -24,11 +31,11 @@ data class ImmediateInstruction(
 
         val result = when (type) {
             ImmediateInstructionType.JALR -> TODO()
-            ImmediateInstructionType.LB -> processor.load(source).firstByte()
-            ImmediateInstructionType.LH -> processor.load(source).firstTwoBytes()
-            ImmediateInstructionType.LW -> processor.load(source)
-            ImmediateInstructionType.LBU -> processor.load(source).firstByteUnsigned()
-            ImmediateInstructionType.LHU -> processor.load(source).firstTwoBytesUnsigned()
+            ImmediateInstructionType.LB -> processor.loadWithImmediate(source).firstByte()
+            ImmediateInstructionType.LH -> processor.loadWithImmediate(source).firstTwoBytes()
+            ImmediateInstructionType.LW -> processor.loadWithImmediate(source)
+            ImmediateInstructionType.LBU -> processor.loadWithImmediate(source).firstByteUnsigned()
+            ImmediateInstructionType.LHU -> processor.loadWithImmediate(source).firstTwoBytesUnsigned()
             ImmediateInstructionType.ADDI -> source + immediate
             ImmediateInstructionType.SLTI -> if (source < immediate) 1 else 0
             ImmediateInstructionType.SLTIU -> TODO()
@@ -41,7 +48,7 @@ data class ImmediateInstruction(
         processor.incrementPC()
     }
 
-    private fun Processor.load(source: Int) = memory.loadWord(source + immediate)
+    private fun Processor.loadWithImmediate(source: Int) = loadWord(source + immediate)
 
 }
 
@@ -60,16 +67,17 @@ enum class ImmediateInstructionType {
     ANDI;
 
     companion object {
-        fun fromOpcode(opcode: Int, funct3: Int): ImmediateInstructionType {
-            return when (funct3) {
-                0b000 -> ADDI
-                0b010 -> SLTI
-                0b100 -> XORI
-                0b011 -> SLTIU
-                0b110 -> ORI
-                0b111 -> ANDI
-                else -> throw RuntimeException("Unknown opcode for immediate instruction: opcode=${opcode.toBinary()}, funct3=${funct3.toBinary()}")
-            }
+        fun fromOpcode(opcode: Int, funct3: Int) = when (funct3) {
+            0b000 -> ADDI
+            0b010 -> SLTI
+            0b100 -> XORI
+            0b011 -> SLTIU
+            0b110 -> ORI
+            0b111 -> ANDI
+            else -> throw RuntimeException(
+                "Unknown funct3 for immediate instruction: " +
+                    "opcode=${opcode.toBinary()}, funct3=${funct3.toBinary()}"
+            )
         }
     }
 }

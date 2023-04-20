@@ -12,9 +12,9 @@ private val REGISTER_ABI_NAME = (0..31).associateWith {
         in 10..17 -> "a${it - 10}"
         in 18..27 -> "s${it - 16}"
         in 28..31 -> "t${it - 25}"
-        else -> throw IllegalArgumentException("Invalid register index")
+        else -> error("Invalid register index: $it")
     }
 }
 
-val Int.registerABIName
-    get() = REGISTER_ABI_NAME[this] ?: error("Invalid register index")
+val Int.registerABIName: String
+    get() = REGISTER_ABI_NAME[this] ?: error("Invalid register index: $this")

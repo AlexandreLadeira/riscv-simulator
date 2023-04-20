@@ -1,6 +1,7 @@
 package entity.instruction
 
 import entity.Processor
+import extensions.mnemonic
 import extensions.registerABIName
 
 class RegisterInstruction(
@@ -10,7 +11,7 @@ class RegisterInstruction(
     private val rd: Int,
 ) : Instruction() {
     override val disassembly =
-        "${type.name.padEnd(8, ' ')} " +
+        "${type.name.mnemonic} " +
             "${rd.registerABIName}, ${rs1.registerABIName}, ${rs2.registerABIName}"
 
     override fun execute(processor: Processor) {
@@ -47,28 +48,27 @@ enum class RegisterInstructionType {
     REM,
     REMU;
 
-    fun getResult(first: Int, second: Int): Int =
-        when (this) {
-            SLLI -> TODO()
-            SRLI -> TODO()
-            SRAI -> TODO()
-            ADD -> first + second
-            SUB -> first - second
-            SLL -> TODO()
-            SLT -> TODO()
-            SLTU -> TODO()
-            XOR -> first xor second
-            SRL -> TODO()
-            SRA -> TODO()
-            OR -> first or second
-            AND -> first and second
-            MUL -> first * second
-            MULH -> TODO()
-            MULHSU -> TODO()
-            MULHU -> TODO()
-            DIV -> first / second
-            DIVU -> TODO()
-            REM -> first % second
-            REMU -> TODO()
-        }
+    fun getResult(first: Int, second: Int): Int = when (this) {
+        SLLI -> TODO()
+        SRLI -> TODO()
+        SRAI -> TODO()
+        ADD -> first + second
+        SUB -> first - second
+        SLL -> TODO()
+        SLT -> TODO()
+        SLTU -> TODO()
+        XOR -> first xor second
+        SRL -> TODO()
+        SRA -> TODO()
+        OR -> first or second
+        AND -> first and second
+        MUL -> first * second
+        MULH -> TODO()
+        MULHSU -> TODO()
+        MULHU -> TODO()
+        DIV -> first / second
+        DIVU -> TODO()
+        REM -> first % second
+        REMU -> TODO()
+    }
 }

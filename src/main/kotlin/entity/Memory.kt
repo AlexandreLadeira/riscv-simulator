@@ -1,13 +1,11 @@
 package entity
 
-class Memory(
-    private val memory: ByteArray
-) {
+class Memory(size: Int) {
+    private val memory = ByteArray(size)
 
-    fun loadWord(address: Int): Int =
-        (0..3).fold(0u) { acc, i ->
-            acc or (loadByte(address + i).toUByte().toUInt() shl (i * 8))
-        }.toInt()
+    fun loadWord(address: Int): Int = (0..3).fold(0u) { acc, i ->
+        acc or (loadByte(address + i).toUByte().toUInt() shl (i * 8))
+    }.toInt()
 
     fun loadByte(address: Int): Byte = memory[address]
 
