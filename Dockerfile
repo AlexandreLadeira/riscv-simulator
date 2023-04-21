@@ -13,4 +13,5 @@ RUN mv build/libs/*.jar /riscv-simulator.jar
 
 WORKDIR /
 
-CMD java -jar riscv-simulator.jar /test/input /test/output
+CMD java -jar riscv-simulator.jar /test/input/011.const.bin
+#CMD java -jar riscv-simulator.jar /test/input /test/output

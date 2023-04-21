@@ -42,6 +42,6 @@ bin/
 .DS_Store
 
 ### Tests ###
-tests/*.elf
-tests/*.bin
-tests/*.o
+test/*.elf
+test/*.bin
+test/*.o

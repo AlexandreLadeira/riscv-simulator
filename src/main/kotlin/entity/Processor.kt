@@ -90,7 +90,7 @@ class Processor(private val memory: Memory) {
 
     private companion object {
         const val NUMBER_OF_REGISTERS = 32
-        const val PROGRAM_COUNTER_INITIAL_VALUE = 0x10074
+        const val PROGRAM_COUNTER_INITIAL_VALUE = 0x100
         const val STACK_POINTER_INDEX = 2
         const val STACK_POINTER_INITIAL_VALUE = 0x10000
 

@@ -15,4 +15,3 @@ $(TESTS):
 	$(CROSS_COMPILER) -c crt.S $(CROSS_CFLAGS)
 	$(CROSS_COMPILER) $(CROSS_CFLAGS) $@.c -o $@.elf -T test.ld $(CROSS_CFLAGS) $(LINK_OPTS)
 	$(CROSS_OBJCOPY) -O binary $@.elf $@.bin
-	rm $@.elf
