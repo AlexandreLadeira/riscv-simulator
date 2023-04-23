@@ -14,6 +14,8 @@ import extensions.rs2
 import extensions.toBinaryString
 import model.LogLine
 import java.io.File
+import java.io.PrintWriter
+
 
 class Simulator(program: ByteArray, outputPath: String) {
     private val registers = IntArray(NUMBER_OF_REGISTERS)
@@ -27,6 +29,10 @@ class Simulator(program: ByteArray, outputPath: String) {
 
     init {
         memory.loadProgram(PROGRAM_COUNTER_INITIAL_VALUE, program)
+        PrintWriter(log).also {
+            it.print("")
+            it.close()
+        }
     }
 
     fun run() {
@@ -56,6 +62,10 @@ class Simulator(program: ByteArray, outputPath: String) {
     }
 
     fun loadWord(address: Int) = memory.loadWord(address)
+
+    fun loadHalf(address: Int) = memory.loadHalf(address)
+
+    fun loadByte(address: Int) = memory.loadByte(address)
 
     fun storeWord(address: Int, value: Int) = memory.storeWord(address = address, value = value)
 
@@ -96,7 +106,7 @@ class Simulator(program: ByteArray, outputPath: String) {
 
         instruction.execute(this)
 
-        log.appendText(partialLogLine.copy(rdValue = readRegister(rd)).toString())
+        log.appendText(partialLogLine.copy(rdValue = readRegister(rd)).toString() + "\n")
     }
 
     private companion object {

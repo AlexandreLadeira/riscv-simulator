@@ -1,10 +1,6 @@
 package entity.instruction
 
 import entity.Simulator
-import extensions.firstByte
-import extensions.firstByteUnsigned
-import extensions.firstTwoBytes
-import extensions.firstTwoBytesUnsigned
 import extensions.funct3
 import extensions.funct7
 import extensions.immediate
@@ -39,11 +35,11 @@ data class ImmediateInstruction(
                 simulator.setPC((source + immediate).withLastBitCleared())
             }
 
-            ImmediateInstructionType.LB -> simulator.loadWithImmediate(source).firstByte()
-            ImmediateInstructionType.LH -> simulator.loadWithImmediate(source).firstTwoBytes()
-            ImmediateInstructionType.LW -> simulator.loadWithImmediate(source)
-            ImmediateInstructionType.LBU -> simulator.loadWithImmediate(source).firstByteUnsigned()
-            ImmediateInstructionType.LHU -> simulator.loadWithImmediate(source).firstTwoBytesUnsigned()
+            ImmediateInstructionType.LB -> simulator.loadByte(source + immediate).toInt()
+            ImmediateInstructionType.LH -> simulator.loadHalf(source + immediate).toInt()
+            ImmediateInstructionType.LW -> simulator.loadWord(source + immediate)
+            ImmediateInstructionType.LBU -> simulator.loadByte(source + immediate).toInt() and 0xFF
+            ImmediateInstructionType.LHU -> simulator.loadHalf(source + immediate).toInt() and 0xFFFF
             ImmediateInstructionType.ADDI -> source + immediate
             ImmediateInstructionType.SLTI -> if (source < immediate) 1 else 0
             ImmediateInstructionType.SLTIU -> if (source < immediate.toUInt().toLong()) 1 else 0
@@ -61,8 +57,6 @@ data class ImmediateInstruction(
             simulator.incrementPC()
         }
     }
-
-    private fun Simulator.loadWithImmediate(source: Int) = loadWord(source + immediate)
 
 }
 

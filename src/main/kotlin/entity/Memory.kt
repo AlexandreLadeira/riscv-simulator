@@ -7,6 +7,10 @@ class Memory(size: Int) {
         acc or (loadByte(address + i).toUByte().toUInt() shl (i * 8))
     }.toInt()
 
+    fun loadHalf(address: Int): Short = (0..1).fold(0u) { acc, i ->
+        acc or (loadByte(address + i).toUByte().toUInt() shl (i * 8))
+    }.toShort()
+
     fun loadByte(address: Int): Byte = memory[address]
 
     fun storeWord(address: Int, value: Int) {
