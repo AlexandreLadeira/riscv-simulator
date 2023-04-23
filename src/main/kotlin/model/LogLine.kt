@@ -15,12 +15,12 @@ data class LogLine(
     val instruction: Instruction
 ) {
     override fun toString(): String =
-        instruction.disassembly.padEnd(32, ' ') +
-            " PC=${pc.toHexString().padStart(8, '0')}, " +
+        "PC=${pc.toHexString().padStart(8, '0')}, " +
             "[${rawInstruction.toHexString().padStart(8, '0')}], " +
-            "x$rdIndex=$rdValue, " +
-            "x$rs1Index=$rs1Value, " +
-            "x$rs2Index=$rs2Value "
+            "x${rdIndex.toString().padStart(2, '0')}=${rdValue.toHexString().padStart(8, '0')}, " +
+            "x${rs1Index.toString().padStart(2, '0')}=${rs1Value.toHexString().padStart(8, '0')}, " +
+            "x${rs2Index.toString().padStart(2, '0')}=${rs2Value.toHexString().padStart(8, '0')} " +
+            instruction.disassembly
 
 }
 

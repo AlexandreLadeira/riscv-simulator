@@ -1,6 +1,6 @@
 package entity.instruction
 
-import entity.Processor
+import entity.Simulator
 import extensions.funct3
 import extensions.mnemonic
 import extensions.registerABIName
@@ -25,18 +25,18 @@ class StoreInstruction(
         immediate = rawInstruction.storeImmediate()
     )
 
-    override fun execute(processor: Processor) {
-        val base = processor.readRegister(rs1)
-        val value = processor.readRegister(rs2)
+    override fun execute(simulator: Simulator) {
+        val base = simulator.readRegister(rs1)
+        val value = simulator.readRegister(rs2)
         val address = base + immediate
 
         when (type) {
-            StoreInstructionType.SB -> processor.storeByte(address, value.toByte())
-            StoreInstructionType.SH -> TODO()
-            StoreInstructionType.SW -> processor.storeWord(address, value)
+            StoreInstructionType.SB -> simulator.storeByte(address, value.toByte())
+            StoreInstructionType.SH -> simulator.storeHalf(address, value)
+            StoreInstructionType.SW -> simulator.storeWord(address, value)
         }
 
-        processor.incrementPC()
+        simulator.incrementPC()
     }
 
 }

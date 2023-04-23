@@ -1,11 +1,13 @@
-import entity.Memory
-import entity.Processor
+import entity.Simulator
 import java.io.File
 
 fun main(args: Array<String>) {
-    val program = File(args[0]).readBytes()
-    val memory = Memory(10 * 1024 * 1024)
-    memory.loadProgram(0x100, program)
-    val processor = Processor(memory)
-    processor.run()
+    val programs = File(args[0]).listFiles { _, name -> name.endsWith(".bin") }?.sortedBy { it.name }
+        ?: error("Failed to load programs")
+
+    programs.forEach { program ->
+        println("Running program ${program.name}")
+        val simulator = Simulator(program.readBytes())
+        simulator.run()
+    }
 }

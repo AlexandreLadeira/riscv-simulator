@@ -15,6 +15,12 @@ class Memory(size: Int) {
         }
     }
 
+    fun storeHalf(address: Int, value: Int) {
+        (0..1).forEach {
+            memory[address + it] = ((value shr (8 * it)) and 0xFF).toByte()
+        }
+    }
+
     fun storeByte(address: Int, value: Byte) {
         memory[address] = value
     }

@@ -1,11 +1,12 @@
 package entity.instruction
 
-import entity.Processor
+import entity.Simulator
 import extensions.firstByte
 import extensions.firstByteUnsigned
 import extensions.firstTwoBytes
 import extensions.firstTwoBytesUnsigned
 import extensions.funct3
+import extensions.funct7
 import extensions.immediate
 import extensions.mnemonic
 import extensions.rd
@@ -24,41 +25,44 @@ data class ImmediateInstruction(
         "${type.name.mnemonic} ${rd.registerABIName}, ${rs1.registerABIName}, $immediate"
 
     constructor(opcode: Int, rawInstruction: Int) : this(
-        type = ImmediateInstructionType.fromOpcode(opcode, rawInstruction.funct3()),
+        type = ImmediateInstructionType.fromOpcode(opcode, rawInstruction.funct3(), rawInstruction.funct7()),
         immediate = rawInstruction.immediate(),
         rs1 = rawInstruction.rs1(),
         rd = rawInstruction.rd()
     )
 
-    override fun execute(processor: Processor) {
-        val source = processor.readRegister(rs1)
+    override fun execute(simulator: Simulator) {
+        val source = simulator.readRegister(rs1)
 
         val result = when (type) {
-            ImmediateInstructionType.JALR -> (processor.programCounter + 4).also {
-                processor.setPC((source + immediate).withLastBitCleared())
+            ImmediateInstructionType.JALR -> (simulator.programCounter + 4).also {
+                simulator.setPC((source + immediate).withLastBitCleared())
             }
 
-            ImmediateInstructionType.LB -> processor.loadWithImmediate(source).firstByte()
-            ImmediateInstructionType.LH -> processor.loadWithImmediate(source).firstTwoBytes()
-            ImmediateInstructionType.LW -> processor.loadWithImmediate(source)
-            ImmediateInstructionType.LBU -> processor.loadWithImmediate(source).firstByteUnsigned()
-            ImmediateInstructionType.LHU -> processor.loadWithImmediate(source).firstTwoBytesUnsigned()
+            ImmediateInstructionType.LB -> simulator.loadWithImmediate(source).firstByte()
+            ImmediateInstructionType.LH -> simulator.loadWithImmediate(source).firstTwoBytes()
+            ImmediateInstructionType.LW -> simulator.loadWithImmediate(source)
+            ImmediateInstructionType.LBU -> simulator.loadWithImmediate(source).firstByteUnsigned()
+            ImmediateInstructionType.LHU -> simulator.loadWithImmediate(source).firstTwoBytesUnsigned()
             ImmediateInstructionType.ADDI -> source + immediate
             ImmediateInstructionType.SLTI -> if (source < immediate) 1 else 0
-            ImmediateInstructionType.SLTIU -> TODO()
+            ImmediateInstructionType.SLTIU -> if (source < immediate.toUInt().toLong()) 1 else 0
             ImmediateInstructionType.XORI -> source xor immediate
             ImmediateInstructionType.ORI -> source or immediate
             ImmediateInstructionType.ANDI -> source and immediate
+            ImmediateInstructionType.SLLI -> source shl (immediate and 0b11111)
+            ImmediateInstructionType.SRLI -> source ushr (immediate and 0b11111)
+            ImmediateInstructionType.SRAI -> source shr (immediate and 0b11111)
         }
 
-        processor.writeToRegister(rd, result)
+        simulator.writeToRegister(rd, result)
 
         if (type != ImmediateInstructionType.JALR) {
-            processor.incrementPC()
+            simulator.incrementPC()
         }
     }
 
-    private fun Processor.loadWithImmediate(source: Int) = loadWord(source + immediate)
+    private fun Simulator.loadWithImmediate(source: Int) = loadWord(source + immediate)
 
 }
 
@@ -74,10 +78,14 @@ enum class ImmediateInstructionType {
     SLTIU,
     XORI,
     ORI,
-    ANDI;
+    ANDI,
+    SLLI,
+    SRLI,
+    SRAI;
+
 
     companion object {
-        fun fromOpcode(opcode: Int, funct3: Int) = when (opcode) {
+        fun fromOpcode(opcode: Int, funct3: Int, funct7: Int) = when (opcode) {
             0b0010011 -> when (funct3) {
                 0b000 -> ADDI
                 0b010 -> SLTI
@@ -85,6 +93,8 @@ enum class ImmediateInstructionType {
                 0b011 -> SLTIU
                 0b110 -> ORI
                 0b111 -> ANDI
+                0b001 -> SLLI
+                0b101 -> if (funct7 == 0) SRLI else SRAI
                 else -> unknownFunct3Error(funct3)
             }
 

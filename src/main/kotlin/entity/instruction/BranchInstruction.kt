@@ -1,6 +1,6 @@
 package entity.instruction
 
-import entity.Processor
+import entity.Simulator
 import extensions.branchImmediate
 import extensions.funct3
 import extensions.mnemonic
@@ -25,14 +25,14 @@ class BranchInstruction(
         immediate = rawInstruction.branchImmediate()
     )
 
-    override fun execute(processor: Processor) {
-        val first = processor.readRegister(rs1)
-        val second = processor.readRegister(rs2)
+    override fun execute(simulator: Simulator) {
+        val first = simulator.readRegister(rs1)
+        val second = simulator.readRegister(rs2)
 
         if (type.shouldBranch(first, second)) {
-            processor.addToPC(immediate)
+            simulator.addToPC(immediate)
         } else {
-            processor.incrementPC()
+            simulator.incrementPC()
         }
     }
 

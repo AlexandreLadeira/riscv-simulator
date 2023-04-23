@@ -1,8 +1,8 @@
 package entity.instruction
 
-import entity.Processor
+import entity.Simulator
 
 sealed class Instruction {
-    abstract fun execute(processor: Processor)
+    abstract fun execute(simulator: Simulator)
     abstract val disassembly: String
 }
