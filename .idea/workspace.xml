@@ -6,18 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9f251e1f-0228-4f3d-8b38-5b53ecdad004" name="Changes" comment="initial commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/Instruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/Instruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/model/LogLine.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/model/LogLine.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/122.loop.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/output/011.const.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/output/122.loop.log" beforeDir="false" />
     </list>
-    <list id="41a32884-40fd-4eb4-ad47-85dd4522ce54" name="Changes by gabriel.cardenete" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-    </list>
+    <list id="41a32884-40fd-4eb4-ad47-85dd4522ce54" name="Changes by gabriel.cardenete" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
