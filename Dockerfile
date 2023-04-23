@@ -1,4 +1,4 @@
-FROM riscv-simulator-base:latest
+FROM ghcr.io/alexandreladeira/riscv-simulator:base
 
 COPY ./test /test/input
 WORKDIR /test/input
