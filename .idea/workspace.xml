@@ -5,20 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f251e1f-0228-4f3d-8b38-5b53ecdad004" name="Changes" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/122.loop.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/output/122.loop.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/011.const.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/011.const.log" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/output/011.const.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/111.if.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/Instruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/Instruction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/model/LogLine.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/model/LogLine.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/122.loop.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/output/011.const.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/output/122.loop.log" beforeDir="false" />
     </list>
     <list id="41a32884-40fd-4eb4-ad47-85dd4522ce54" name="Changes by gabriel.cardenete" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/Memory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/Memory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,23 +61,6 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.8.20/6a8d4dfebb88f951bcd9f58636f085bf24ff3e8b/kotlin-stdlib-1.8.20-sources.jar!/kotlin/Primitives.kt" root0="SKIP_INSPECTION" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt">
-      <ranges>
-        <range start1="3" end1="7" start2="3" end2="3" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="41" end1="46" start2="37" end2="42" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
-        <range start1="63" end1="65" start2="59" end2="59" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt">
-      <ranges>
-        <range start1="16" end1="16" start2="16" end2="18" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="29" end1="29" start2="31" end2="35" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="58" end1="58" start2="64" end2="68" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
-        <range start1="98" end1="99" start2="108" end2="109" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -138,6 +119,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Kotlin.MainKt" />
@@ -174,21 +159,6 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="initial commit" />
     <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-function">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/entity/Memory.kt</url>
-          <line>2</line>
-          <properties class="entity.Memory" method="&lt;init&gt;">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -45,3 +45,4 @@ bin/
 test/*.elf
 test/*.bin
 test/*.o
+output/

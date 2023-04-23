@@ -24,6 +24,9 @@ class Simulator(program: ByteArray, outputPath: String) {
 
     private val log = File(outputPath)
 
+    var cycleCount: Int = 0
+        private set
+
     var programCounter = PROGRAM_COUNTER_INITIAL_VALUE
         private set
 
@@ -40,6 +43,7 @@ class Simulator(program: ByteArray, outputPath: String) {
             val rawInstruction = memory.loadWord(programCounter)
             val instruction = parseInstruction(rawInstruction)
             executeInstruction(instruction, rawInstruction)
+            cycleCount += instruction.cycleCost
         }
     }
 

@@ -15,5 +15,6 @@ fun main(args: Array<String>) {
             outputPath = outputFolder + "/" + program.name.replace(".bin", ".log")
         )
         simulator.run()
+        println("Finished running program ${program.name} in ${simulator.cycleCount} cycles")
     }
 }
