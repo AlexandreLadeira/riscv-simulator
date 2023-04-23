@@ -13,11 +13,14 @@ import extensions.rs1
 import extensions.rs2
 import extensions.toBinaryString
 import model.LogLine
+import java.io.File
 
-class Simulator(program: ByteArray) {
+class Simulator(program: ByteArray, outputPath: String) {
     private val registers = IntArray(NUMBER_OF_REGISTERS)
 
     private val memory = Memory(MEMORY_SIZE)
+
+    private val log = File(outputPath)
 
     var programCounter = PROGRAM_COUNTER_INITIAL_VALUE
         private set
@@ -93,7 +96,7 @@ class Simulator(program: ByteArray) {
 
         instruction.execute(this)
 
-        println(partialLogLine.copy(rdValue = readRegister(rd)))
+        log.appendText(partialLogLine.copy(rdValue = readRegister(rd)).toString())
     }
 
     private companion object {

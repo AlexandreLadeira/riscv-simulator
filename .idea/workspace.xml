@@ -5,25 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f251e1f-0228-4f3d-8b38-5b53ecdad004" name="Changes" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/UpperInstruction.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/Memory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/Memory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/Processor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/BranchInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/BranchInstruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/Instruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/Instruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/JumpInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/JumpInstruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/RegisterInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/RegisterInstruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/StoreInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/StoreInstruction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt" afterDir="false" />
     </list>
     <list id="41a32884-40fd-4eb4-ad47-85dd4522ce54" name="Changes by gabriel.cardenete" comment="">
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/JumpInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/JumpInstruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/RegisterInstruction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/instruction/RegisterInstruction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/extensions/IntExtensions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/extensions/IntExtensions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/model/LogLine.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/model/LogLine.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,45 +57,12 @@
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.8.20/6a8d4dfebb88f951bcd9f58636f085bf24ff3e8b/kotlin-stdlib-1.8.20-sources.jar!/kotlin/Primitives.kt" root0="SKIP_INSPECTION" />
   </component>
   <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/kotlin/entity/instruction/ImmediateInstruction.kt">
+    <file path="$PROJECT_DIR$/src/main/kotlin/entity/Simulator.kt">
       <ranges>
-        <range start1="2" end1="3" start2="2" end2="3" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="8" end1="8" start2="8" end2="9" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="26" end1="27" start2="27" end2="28" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="32" end1="34" start2="33" end2="35" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="36" end1="38" start2="37" end2="39" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="40" end1="45" start2="41" end2="46" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="47" end1="48" start2="48" end2="49" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="51" end1="51" start2="52" end2="55" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="53" end1="54" start2="57" end2="58" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="56" end1="57" start2="60" end2="61" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="60" end1="61" start2="64" end2="65" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="76" end1="77" start2="80" end2="85" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
-        <range start1="79" end1="80" start2="87" end2="88" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="87" end1="87" start2="95" end2="97" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/kotlin/entity/instruction/RegisterInstruction.kt">
-      <ranges>
-        <range start1="2" end1="3" start2="2" end2="5" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="4" end1="4" start2="6" end2="7" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="5" end1="5" start2="8" end2="11" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="16" end1="17" start2="22" end2="30" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="18" end1="20" start2="31" end2="33" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="22" end1="24" start2="35" end2="37" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="28" end1="31" start2="41" end2="41" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="51" end1="54" start2="61" end2="61" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="56" end1="59" start2="63" end2="66" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="60" end1="62" start2="67" end2="69" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
-        <range start1="65" end1="72" start2="72" end2="123" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/kotlin/entity/instruction/JumpInstruction.kt">
-      <ranges>
-        <range start1="2" end1="3" start2="2" end2="3" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
-        <range start1="5" end1="5" start2="5" end2="6" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
-        <range start1="11" end1="12" start2="12" end2="13" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
-        <range start1="18" end1="21" start2="19" end2="22" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
+        <range start1="15" end1="15" start2="15" end2="16" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
+        <range start1="16" end1="17" start2="17" end2="18" changelist="9f251e1f-0228-4f3d-8b38-5b53ecdad004" />
+        <range start1="20" end1="20" start2="21" end2="23" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
+        <range start1="95" end1="96" start2="98" end2="99" changelist="41a32884-40fd-4eb4-ad47-85dd4522ce54" />
       </ranges>
     </file>
   </component>
@@ -163,7 +117,7 @@
     <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="riscv-simulator.main" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;$PROJECT_DIR$/src/main/resources/111.if.bin&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;$PROJECT_DIR$/src/main/resources&quot; &quot;$PROJECT_DIR$/src/main/resources&quot;" />
       <shortenClasspath name="NONE" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -183,7 +137,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1681667883708</updated>
-      <workItem from="1681667884808" duration="40335000" />
+      <workItem from="1681667884808" duration="40980000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1681668051035</created>
