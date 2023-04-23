@@ -10,7 +10,7 @@ class JumpInstruction(
     private val immediate: Int
 ) : Instruction() {
 
-    override val disassembly = "jal      ${rd.registerABIName}, $immediate"
+    override val disassembly = "JAL      ${rd.registerABIName}, $immediate"
 
     constructor(rawInstruction: Int) : this(
         rd = rawInstruction.rd(),

@@ -5,9 +5,11 @@ import extensions.funct3
 import extensions.funct7
 import extensions.immediate
 import extensions.mnemonic
+import extensions.opcode
 import extensions.rd
 import extensions.registerABIName
 import extensions.rs1
+import extensions.shamtImmediate
 import extensions.toBinaryString
 import extensions.withLastBitCleared
 
@@ -17,15 +19,16 @@ data class ImmediateInstruction(
     private val rs1: Int,
     private val rd: Int
 ) : Instruction() {
-    override val disassembly =
-        "${type.name.mnemonic} ${rd.registerABIName}, ${rs1.registerABIName}, $immediate"
+    override val disassembly = when (type) {
+        ImmediateInstructionType.LB,
+        ImmediateInstructionType.LH,
+        ImmediateInstructionType.LW,
+        ImmediateInstructionType.LBU,
+        ImmediateInstructionType.LHU ->
+            "${type.name.mnemonic} ${rd.registerABIName}, $immediate(${rs1.registerABIName})"
 
-    constructor(opcode: Int, rawInstruction: Int) : this(
-        type = ImmediateInstructionType.fromOpcode(opcode, rawInstruction.funct3(), rawInstruction.funct7()),
-        immediate = rawInstruction.immediate(),
-        rs1 = rawInstruction.rs1(),
-        rd = rawInstruction.rd()
-    )
+        else -> "${type.name.mnemonic} ${rd.registerABIName}, ${rs1.registerABIName}, $immediate"
+    }
 
     override fun execute(simulator: Simulator) {
         val source = simulator.readRegister(rs1)
@@ -39,22 +42,46 @@ data class ImmediateInstruction(
             ImmediateInstructionType.LH -> simulator.loadHalf(source + immediate).toInt()
             ImmediateInstructionType.LW -> simulator.loadWord(source + immediate)
             ImmediateInstructionType.LBU -> simulator.loadByte(source + immediate).toInt() and 0xFF
-            ImmediateInstructionType.LHU -> simulator.loadHalf(source + immediate).toInt() and 0xFFFF
+            ImmediateInstructionType.LHU -> simulator.loadHalf(source + immediate)
+                .toInt() and 0xFFFF
+
             ImmediateInstructionType.ADDI -> source + immediate
             ImmediateInstructionType.SLTI -> if (source < immediate) 1 else 0
             ImmediateInstructionType.SLTIU -> if (source < immediate.toUInt().toLong()) 1 else 0
             ImmediateInstructionType.XORI -> source xor immediate
             ImmediateInstructionType.ORI -> source or immediate
             ImmediateInstructionType.ANDI -> source and immediate
-            ImmediateInstructionType.SLLI -> source shl (immediate and 0b11111)
-            ImmediateInstructionType.SRLI -> source ushr (immediate and 0b11111)
-            ImmediateInstructionType.SRAI -> source shr (immediate and 0b11111)
+            ImmediateInstructionType.SLLI -> source shl immediate
+            ImmediateInstructionType.SRLI -> source ushr immediate
+            ImmediateInstructionType.SRAI -> source shr immediate
         }
 
         simulator.writeToRegister(rd, result)
 
         if (type != ImmediateInstructionType.JALR) {
             simulator.incrementPC()
+        }
+    }
+
+    companion object {
+        fun fromRawInstruction(rawInstruction: Int): ImmediateInstruction {
+            val type = ImmediateInstructionType.fromOpcode(
+                rawInstruction.opcode(),
+                rawInstruction.funct3(),
+                rawInstruction.funct7()
+            )
+            return ImmediateInstruction(
+                type = type,
+                immediate = when (type) {
+                    ImmediateInstructionType.SLLI,
+                    ImmediateInstructionType.SRLI,
+                    ImmediateInstructionType.SRAI -> rawInstruction.shamtImmediate()
+
+                    else -> rawInstruction.immediate()
+                },
+                rs1 = rawInstruction.rs1(),
+                rd = rawInstruction.rd()
+            )
         }
     }
 

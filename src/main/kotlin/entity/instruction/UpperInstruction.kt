@@ -10,7 +10,7 @@ class UpperInstruction(
     private val immediate: Int
 ) : Instruction() {
 
-    override val disassembly = "lui      ${rd.registerABIName}, $immediate"
+    override val disassembly = "LUI      ${rd.registerABIName}, $immediate"
 
     override fun execute(simulator: Simulator) {
         simulator.writeToRegister(rd, immediate shl 12)

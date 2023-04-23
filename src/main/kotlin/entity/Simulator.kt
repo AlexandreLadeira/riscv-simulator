@@ -74,10 +74,10 @@ class Simulator(program: ByteArray, outputPath: String) {
     fun storeByte(address: Int, value: Byte) = memory.storeByte(address = address, value = value)
 
     private fun parseInstruction(rawInstruction: Int): Instruction =
-        when (val opcode = rawInstruction.opcode()) {
+        when (rawInstruction.opcode()) {
             IMMEDIATE_INSTRUCTION_OPCODE,
             LOAD_INSTRUCTION_OPCODE,
-            JALR_INSTRUCTION_OPCODE -> ImmediateInstruction(opcode, rawInstruction)
+            JALR_INSTRUCTION_OPCODE -> ImmediateInstruction.fromRawInstruction(rawInstruction)
 
             STORE_INSTRUCTION_OPCODE -> StoreInstruction(rawInstruction)
             BRANCH_INSTRUCTION_OPCODE -> BranchInstruction(rawInstruction)

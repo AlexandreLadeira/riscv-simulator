@@ -11,7 +11,7 @@ fun Int.bits(start: Int, end: Int) =
 fun Int.withLastBitCleared() = this and (1.inv())
 
 fun Int.toBinaryString() = this.toUInt().toString(radix = 2)
-fun Int.toHexString() = this.toUInt().toString(radix = 16)
+fun Int.toHexString() = this.toUInt().toString(radix = 16).padStart(8, '0')
 
 fun Int.opcode() = bits(0, 6)
 fun Int.rs1() = bits(15, 19)
@@ -26,7 +26,10 @@ fun Int.branchImmediate() =
 fun Int.jumpImmediate() =
     (bits(31, 31) shl 20) or (bits(12, 19) shl 12) or (bits(20, 20) shl 11) or (bits(21, 30) shl 1)
 
-fun Int.upperImmediate() = bits(12, 31)
+fun Int.upperImmediate() = bits(12, 31) and 0xFFFFF
+fun Int.shamtImmediate() = bits(20, 24) and 0b11111
 
 fun Int.funct3() = bits(12, 14)
 fun Int.funct7() = bits(25, 31)
+
+fun Int.toRegisterName() = "x${this.toString().padStart(2, '0')}"
