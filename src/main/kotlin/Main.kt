@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
         println("Running program ${program.name}")
         val simulator = Simulator(
             program = program.readBytes(),
-            outputPath = outputFolder + "/" + program.name.replace(".bin", ".log")
+            logPath = outputFolder + "/" + program.name.replace(".bin", ".log")
         )
         simulator.run()
         println("Finished running program ${program.name} in ${simulator.cycleCount} cycles")

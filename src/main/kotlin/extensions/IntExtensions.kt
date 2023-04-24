@@ -1,17 +1,12 @@
 package extensions
 
-fun Int.firstByte() = this shr 24
-fun Int.firstTwoBytes() = this shr 16
-fun Int.firstByteUnsigned() = this ushr 24
-fun Int.firstTwoBytesUnsigned() = this ushr 16
-
 fun Int.bits(start: Int, end: Int) =
     (this and ((1L shl (end + 1)) - 1).toInt()) shr start
 
 fun Int.withLastBitCleared() = this and (1.inv())
 
 fun Int.toBinaryString() = this.toUInt().toString(radix = 2)
-fun Int.toHexString() = this.toUInt().toString(radix = 16).padStart(8, '0')
+fun Int.toHexString(padding: Int = 8) = this.toUInt().toString(radix = 16).padStart(padding, '0')
 
 fun Int.opcode() = bits(0, 6)
 fun Int.rs1() = bits(15, 19)

@@ -1,8 +1,6 @@
 package entity.instruction
 
 import entity.Simulator
-import extensions.jumpImmediate
-import extensions.rd
 import extensions.registerABIName
 
 class JumpInstruction(
@@ -11,11 +9,6 @@ class JumpInstruction(
 ) : Instruction() {
 
     override val disassembly = "JAL      ${rd.registerABIName}, $immediate"
-
-    constructor(rawInstruction: Int) : this(
-        rd = rawInstruction.rd(),
-        immediate = rawInstruction.jumpImmediate()
-    )
 
     override fun execute(simulator: Simulator) {
         simulator.writeToRegister(rd, simulator.programCounter + 4)
