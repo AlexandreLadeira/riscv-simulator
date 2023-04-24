@@ -14,5 +14,5 @@ Então, é possível rodar a imagem construída, mapeando o volume `/test/output
 os logs de execução:
 
 ```
-docker run -v ./output:/test/output riscv-simulator
+docker run -v $PWD/output:/test/output riscv-simulator
 ```
