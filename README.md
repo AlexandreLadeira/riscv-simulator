@@ -21,10 +21,18 @@ docker run --rm -v $PWD/output:/test/output riscv-simulator
 
 Para a execução sem Dockerfile, é necessário ter compilado o riscv-gnu-toolchain e ter o Java 17 instalado.
 
+Para compilar os testes, execute os seguintes comandos, especificando na variável RISCV_TOOLCHAIN_PREFIX o prefixo da
+instalação do toolchain compilado do RISC-V:
+
 ```
 cd test
 RISCV_TOOLCHAIN_PREFIX=riscv32-unknown-elf make
 cd ..
+```
+
+Então, é possível executar os casos de teste na pasta `test`, com a saída dos logs na pasta `output`:
+
+```
 mkdir output
 ./gradlew run --args "test output"
 ```
