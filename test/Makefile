@@ -1,4 +1,4 @@
-CROSS_OBJCOPY="riscv32-unknown-elf-objcopy"
+CROSS_OBJCOPY="$(RISCV_TOOLCHAIN_PREFIX)-objcopy"
 TESTS = $(patsubst %.riscv,%,$(wildcard *.riscv))
 
 build: $(TESTS)

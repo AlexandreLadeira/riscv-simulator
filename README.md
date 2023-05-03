@@ -23,7 +23,7 @@ Para a execução sem Dockerfile, é necessário ter compilado o riscv-gnu-toolc
 
 ```
 cd test
-make
+RISCV_TOOLCHAIN_PREFIX=riscv32-unknown-elf make
 cd ..
 mkdir output
 ./gradlew run --args "test output"
