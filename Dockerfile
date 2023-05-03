@@ -10,8 +10,7 @@ COPY src /app/src/
 
 WORKDIR /app
 
-# Build jar if it is not present
-RUN [ -f build/libs/*.jar ] && : || ./gradlew --no-daemon clean jar
+RUN --mount=type=cache,target=/app/.gradle --mount=type=cache,target=/root/.gradle ./gradlew --no-daemon jar
 RUN mv build/libs/*.jar /riscv-simulator.jar
 
 WORKDIR /

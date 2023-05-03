@@ -1,7 +1,7 @@
 package entity
 
 import entity.instruction.Instruction
-import extensions.bits
+import extensions.rd
 import extensions.rs1
 import extensions.rs2
 import model.LogLine
@@ -15,6 +15,8 @@ class Simulator(program: ByteArray, logPath: String) {
     private val memory = Memory(MEMORY_SIZE)
 
     private val log = File(logPath)
+
+    private var stopped = false
 
     var cycleCount: Int = 0
         private set
@@ -31,11 +33,15 @@ class Simulator(program: ByteArray, logPath: String) {
     }
 
     fun run() {
-        while (programCounter < PROGRAM_COUNTER_MAX_VALUE) {
+        while (!stopped) {
             val rawInstruction = memory.loadWord(programCounter)
             val instruction = Parser.parseFromRawInstruction(rawInstruction)
             executeInstruction(instruction, rawInstruction)
         }
+    }
+
+    fun stop() {
+        stopped = true
     }
 
     fun readRegister(register: Int): Int = registers[register]
@@ -71,7 +77,7 @@ class Simulator(program: ByteArray, logPath: String) {
     private fun executeInstruction(instruction: Instruction, rawInstruction: Int) {
         val rs1 = rawInstruction.rs1()
         val rs2 = rawInstruction.rs2()
-        val rd = rawInstruction.bits(7, 11)
+        val rd = rawInstruction.rd()
 
         val partialLogLine = LogLine(
             pc = programCounter,
@@ -95,7 +101,6 @@ class Simulator(program: ByteArray, logPath: String) {
     private companion object {
         const val NUMBER_OF_REGISTERS = 32
         const val MEMORY_SIZE = 10 * 1024 * 1024
-        const val PROGRAM_COUNTER_INITIAL_VALUE = 0x100
-        const val PROGRAM_COUNTER_MAX_VALUE = 0x20000000
+        const val PROGRAM_COUNTER_INITIAL_VALUE = 0x1d8
     }
 }

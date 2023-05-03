@@ -2,7 +2,7 @@
 
 Simulador de um processador RISC-V em Kotlin.
 
-## Execução
+## Execução com Dockerfile
 
 Para buildar o arquivo docker, utilize o seguinte comando:
 
@@ -14,5 +14,17 @@ Então, é possível rodar a imagem construída, mapeando o volume `/test/output
 os logs de execução:
 
 ```
-docker run -v $PWD/output:/test/output riscv-simulator
+docker run --rm -v $PWD/output:/test/output riscv-simulator
+```
+
+## Execução sem Dockerfile
+
+Para a execução sem Dockerfile, é necessário ter compilado o riscv-gnu-toolchain e ter o Java 17 instalado.
+
+```
+cd test
+make
+cd ..
+mkdir output
+./gradlew run --args "test output"
 ```

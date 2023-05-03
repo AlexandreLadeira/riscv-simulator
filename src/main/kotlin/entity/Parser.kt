@@ -2,6 +2,7 @@ package entity
 
 import entity.instruction.BranchInstruction
 import entity.instruction.BranchInstructionType
+import entity.instruction.BreakInstruction
 import entity.instruction.ImmediateInstruction
 import entity.instruction.ImmediateInstructionType
 import entity.instruction.Instruction
@@ -11,6 +12,7 @@ import entity.instruction.RegisterInstructionType
 import entity.instruction.StoreInstruction
 import entity.instruction.StoreInstructionType
 import entity.instruction.UpperInstruction
+import entity.instruction.UpperInstructionType
 import extensions.branchImmediate
 import extensions.funct3
 import extensions.funct7
@@ -35,7 +37,9 @@ object Parser {
     private const val BRANCH_INSTRUCTION_OPCODE = 0b1100011
     private const val JUMP_INSTRUCTION_OPCODE = 0b1101111
     private const val LUI_INSTRUCTION_OPCODE = 0b0110111
+    private const val AUIPC_INSTRUCTION_OPCODE = 0b0010111
     private const val REGISTER_INSTRUCTION_OPCODE = 0b0110011
+    private const val SYSTEM_INSTRUCTION_OPCODE = 0b1110011
 
     fun parseFromRawInstruction(rawInstruction: Int): Instruction {
         return when (rawInstruction.opcode()) {
@@ -46,8 +50,10 @@ object Parser {
             STORE_INSTRUCTION_OPCODE -> buildStoreInstruction(rawInstruction)
             BRANCH_INSTRUCTION_OPCODE -> buildBranchInstruction(rawInstruction)
             JUMP_INSTRUCTION_OPCODE -> buildJumpInstruction(rawInstruction)
-            LUI_INSTRUCTION_OPCODE -> buildUpperInstruction(rawInstruction)
+            LUI_INSTRUCTION_OPCODE -> buildUpperInstruction(UpperInstructionType.LUI, rawInstruction)
+            AUIPC_INSTRUCTION_OPCODE -> buildUpperInstruction(UpperInstructionType.AUIPC, rawInstruction)
             REGISTER_INSTRUCTION_OPCODE -> buildRegisterInstruction(rawInstruction)
+            SYSTEM_INSTRUCTION_OPCODE -> BreakInstruction()
             else -> throw IllegalArgumentException("Unknown instruction: ${rawInstruction.toHexString()}")
         }
     }
@@ -141,7 +147,8 @@ object Parser {
         immediate = rawInstruction.jumpImmediate()
     )
 
-    private fun buildUpperInstruction(rawInstruction: Int) = UpperInstruction(
+    private fun buildUpperInstruction(type: UpperInstructionType, rawInstruction: Int) = UpperInstruction(
+        type = type,
         rd = rawInstruction.rd(),
         immediate = rawInstruction.upperImmediate()
     )
