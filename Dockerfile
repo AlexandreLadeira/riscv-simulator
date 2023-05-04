@@ -2,7 +2,7 @@ FROM ghcr.io/alexandreladeira/riscv-simulator:base
 
 COPY test /test/input/
 WORKDIR /test/input
-RUN make
+RUN RISCV_TOOLCHAIN_PREFIX=riscv32-unknown-elf make
 
 COPY gradlew gradlew.bat build.gradle.kts settings.gradle.kts gradle.properties /app/
 COPY gradle /app/gradle/
