@@ -60,7 +60,7 @@ enum class RegisterInstructionType {
             MUL -> first * second
             MULH -> ((first.toLong() * second.toLong()) ushr 32).toInt()
             MULHSU -> ((first.toLong() * (second.toUInt().toLong())) ushr 32).toInt()
-            MULHU -> ((first.toULong() * second.toULong()) shr 32).toInt()
+            MULHU -> ((first.toUInt().toULong() * second.toUInt().toULong()) shr 32).toInt()
             DIV -> if (second != 0) first / second else -1
             DIVU -> if (second != 0) (first.toUInt() / second.toUInt()).toInt() else -1
             REM -> if (second != 0) first % second else first
